@@ -1,0 +1,51 @@
+.profile-page {
+  padding: 24px;
+  font-family: var(--font-family);
+  background: #fafafa;
+  min-height: 100vh;
+}
+
+.profile-title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #071f2b;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.profile-actions {
+  width: 100%;
+  margin-bottom: 24px;
+
+  .full-width-button {
+    width: 100%;
+    background: #db3702 !important;
+    color: #fff !important;
+    border-radius: 16px;
+    padding: 14px 0;
+    font-weight: 500;
+    font-size: 18px;
+  }
+}
+
+.friends-section {
+  width: 100%;
+
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #071f2b;
+    margin-bottom: 16px;
+  }
+
+  .no-friends {
+    text-align: center;
+    color: rgba(7, 31, 43, 0.7);
+    font-size: 16px;
+    padding: 20px 0;
+  }
+
+  .friends-list {
+    width: 100%;
+  }
+}

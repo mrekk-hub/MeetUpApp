@@ -1,0 +1,114 @@
+.send-message-modal {
+  width: 90%;
+  max-width: 700px;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    font-family: var(--font-family);
+  }
+
+  &__header {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: #fafafa;
+    flex-shrink: 0;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+      color: #071f2b;
+    }
+  }
+
+  &__chat {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scroll-behavior: smooth;
+    background: #f9f9f9;
+  }
+
+  &__msg {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    position: relative;
+    font-size: 15px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    background: #ececec;
+    align-self: flex-start;
+
+    &--me {
+      background: #db3702;
+      color: #fff;
+      align-self: flex-end;
+    }
+
+    &__time {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-top: 4px;
+      text-align: right;
+    }
+  }
+
+  &__form {
+    flex-shrink: 0;
+    display: flex;
+    gap: 8px;
+    padding: 16px 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    background: #fafafa;
+
+    input {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: var(--font-family);
+      font-size: 15px;
+      outline: none;
+
+      &:focus {
+        border-color: #db3702;
+      }
+    }
+
+    button {
+      padding: 10px 18px;
+      background: #db3702;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #b82f00;
+      }
+    }
+  }
+
+  &__empty {
+    text-align: center;
+    color: #888;
+    margin-top: 20px;
+  }
+}
