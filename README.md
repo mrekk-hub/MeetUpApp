@@ -1,30 +1,100 @@
-# React + TypeScript + Vite
+# MeetUp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Мобильное веб-приложение для поиска ресторанов, бронирования столиков и планирования встреч с друзьями.
 
-Currently, two official plugins are available:
+Проект разработан в рамках программы «Студенческий стартап». Сейчас это фронтенд-прототип: интерфейс и пользовательские сценарии реализованы полностью, а данные о ресторанах хранятся в JSON-файлах, имитирующих ответы сервера.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Демо:** [ссылка на развёрнутое приложение]
 
-## Expanding the ESLint configuration
+<!-- Сюда стоит добавить 2–3 скриншота: карта, страница ресторана, оформление брони. -->
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Возможности
 
-- Configure the top-level `parserOptions` property like this:
+**Поиск ресторанов**
+- карта с метками заведений и карточкой ресторана по нажатию;
+- поиск и фильтры по кухне, среднему чеку, станции метро, району, режиму работы, рейтингу и наградам;
+- подборки на главном экране и истории (stories) в стиле соцсетей.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+**Страница ресторана**
+- фотогалерея (интерьер, вид из окна, подача блюд, гости);
+- рейтинг, награды, адрес, обзор заведения и отзывы посетителей с возможностью оставить свой;
+- меню с категориями и подробной карточкой блюда.
+
+**Бронирование и предзаказ**
+- выбор даты, времени и количества гостей;
+- корзина с предзаказом блюд к визиту и комментарием к заказу;
+- оформление заказа с выбором способа оплаты;
+- список заказов по статусам: текущие, отменённые, завершённые.
+
+**Встречи с друзьями**
+- профиль со списком друзей;
+- добавление и удаление друзей;
+- встроенный чат для обсуждения встречи.
+
+**Вход** по номеру телефона с подтверждением.
+
+## Технологии
+
+| Область | Инструменты |
+|---|---|
+| Язык | TypeScript |
+| UI | React 18, SCSS, Swiper |
+| Состояние | MobX, mobx-react-lite, React Context |
+| Маршрутизация | React Router 7 |
+| Сборка и качество кода | Vite 5, ESLint |
+| Деплой | Amvera (Node.js Browser) |
+
+## Архитектура
+
+Структура кода вдохновлена подходом Feature-Sliced Design: код разделён на слои от общего к частному, и каждый слой может использовать только нижележащие.
+
+```
+src/
+├── app/        # точка входа: роутер, провайдеры, конфигурация, шрифты
+├── pages/      # страницы: карта, ресторан, меню, корзина, заказ, профиль, вход
+├── widgets/    # крупные блоки интерфейса: карта, модальные окна, карточки, отзывы
+├── features/   # пользовательские сценарии: корзина, навигация
+├── entities/   # бизнес-сущности (данные брони)
+└── shared/     # переиспользуемое: UI-кит, API-сервисы, MobX-сторы, типы, утилиты
+
+public/
+├── db/         # JSON с моковыми данными: рестораны, меню, отзывы, награды, истории
+└── img/        # изображения
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Данные загружаются через слой API-сервисов (`src/shared/api`). Сейчас они читают JSON из `public/db`, поэтому для перехода на настоящий бэкенд достаточно заменить адреса запросов, не трогая компоненты. Корзина, брони, друзья и сообщения сохраняются в `localStorage`.
+
+## Запуск
+
+Требуется Node.js 18 или новее.
+
+```bash
+git clone https://github.com/mrekk-hub/MeetUpApp.git
+cd MeetUpApp
+npm install
+npm run dev
+```
+
+Приложение откроется по адресу `http://localhost:5173`. Интерфейс рассчитан на мобильные устройства, поэтому в браузере на компьютере удобнее включить режим эмуляции телефона в инструментах разработчика.
+
+Другие команды:
+
+```bash
+npm run build     # production-сборка в папку dist/
+npm run preview   # локальный просмотр production-сборки
+npm run lint      # проверка кода ESLint
+```
+
+Инструкция по публикации на Amvera — в [AMVERA_DEPLOY.md](AMVERA_DEPLOY.md).
+
+## Команда и моя роль
+
+[Сколько человек было в команде и за что отвечали лично вы: например, архитектура, карта и фильтры, бронирование, профиль и чат.]
+
+## Планы развития
+
+- бэкенд с базой данных и REST API вместо моковых JSON;
+- реальная авторизация с отправкой SMS-кода;
+- совместное бронирование: приглашение друзей в бронь и голосование за ресторан;
+- интерактивная карта на основе картографического API;
+- уведомления о статусе брони.
